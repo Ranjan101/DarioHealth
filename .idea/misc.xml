@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Ddrive/DDrive/Workspaceandroid/KotlinSVNProject/DarioHealth/app/src/main/res/drawable/background_search.xml" value="0.18703703703703703" />
+        <entry key="..\:/Ddrive/DDrive/Workspaceandroid/KotlinSVNProject/DarioHealth/app/src/main/res/layout/dario_health_activity_main.xml" value="0.1875" />
+        <entry key="..\:/Ddrive/DDrive/Workspaceandroid/KotlinSVNProject/DarioHealth/app/src/main/res/layout/dario_health_favorites_movie_list_activity.xml" value="0.1875" />
+        <entry key="..\:/Ddrive/DDrive/Workspaceandroid/KotlinSVNProject/DarioHealth/app/src/main/res/layout/dario_health_favorites_movie_list_adaptor_activity.xml" value="0.1875" />
+        <entry key="..\:/Ddrive/DDrive/Workspaceandroid/KotlinSVNProject/DarioHealth/app/src/main/res/layout/dario_health_movies_list_activity_main.xml" value="0.1875" />
+        <entry key="..\:/Ddrive/DDrive/Workspaceandroid/KotlinSVNProject/DarioHealth/app/src/main/res/layout/dario_health_movies_list_adaptor_activity_main.xml" value="0.25" />
+        <entry key="..\:/Ddrive/DDrive/Workspaceandroid/KotlinSVNProject/DarioHealth/app/src/main/res/layout/dario_health_movies_list_detail_activity.xml" value="0.2" />
+        <entry key="..\:/Ddrive/DDrive/Workspaceandroid/KotlinSVNProject/DarioHealth/app/src/main/res/layout/dario_health_splash_screen_activity.xml" value="0.1875" />
+        <entry key="..\:/Ddrive/DDrive/Workspaceandroid/KotlinSVNProject/DarioHealth/app/src/main/res/layout/item_search_activity_main.xml" value="0.1875" />
+        <entry key="..\:/Ddrive/DDrive/Workspaceandroid/KotlinSVNProject/DarioHealth/app/src/main/res/menu/main_menu.xml" value="0.1875" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>
