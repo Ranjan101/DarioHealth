@@ -21,13 +21,11 @@ class DarioHealthApplication : Application() {
     companion object {
         var app: DarioHealthApplication? = null
         private var sweetAlertDialog: SweetAlertDialog? = null
-        lateinit var darioHealthMovieRepository: DarioHealthMovieRepository
     }
 
     override fun onCreate() {
         super.onCreate()
         app = this;
-        initialize()
 
     }
 
@@ -189,14 +187,6 @@ class DarioHealthApplication : Application() {
         SUCCESS, ERROR, UPDATE, WARNING
     }
 
-
-    private fun initialize() {
-        val darioHealthServiceAPI =
-            RetrofitHelper.getInstance().create(DarioHealthServiceAPI::class.java)
-        val database = FavoritesMovieListDatabase.getDatabase(applicationContext)
-        darioHealthMovieRepository =
-            DarioHealthMovieRepository(darioHealthServiceAPI, database, applicationContext)
-    }
 
     fun hideSoftKeyboard(mActivity: Activity?) {
         if (mActivity == null || mActivity.isFinishing) {

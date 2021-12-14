@@ -15,13 +15,19 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import cn.pedant.SweetAlert.SweetAlertDialog
+import cn.pedant.SweetAlert.SweetAlertDialog.OnSweetClickListener
+import com.cheezycode.randomquote.api.DarioHealthServiceAPI
+import com.cheezycode.randomquote.api.RetrofitHelper
 import com.dario.health.BuildConfig
 import com.dario.health.DarioHealthApplication
 import com.dario.health.R
 import com.dario.health.adaptors.DarioHealthMovieListAdaptor
+import com.dario.health.database.FavoritesMovieListDatabase
 import com.dario.health.database.MovieListEntity
 import com.dario.health.databinding.DarioHealthMoviesListActivityMainBinding
 import com.dario.health.networkUtils.NetworkUtils
+import com.dario.health.repository.DarioHealthMovieRepository
 import com.dario.health.repository.Response
 import com.dario.health.viewmodel.MovieViewModel
 import com.dario.health.viewmodel.MovieViewModelFactory
@@ -66,7 +72,11 @@ class DarioHealthMovieListMainActivity : AppCompatActivity(),
 
 
         }
-        val repository = DarioHealthApplication.darioHealthMovieRepository
+        val darioHealthServiceAPI =
+            RetrofitHelper.getInstance().create(DarioHealthServiceAPI::class.java)
+        val database = FavoritesMovieListDatabase.getDatabase(this)
+        val repository =
+            DarioHealthMovieRepository(darioHealthServiceAPI, database, this)
         layoutBinder.floatingActionButtonRefresh.setOnClickListener(View.OnClickListener {
             val intent = Intent(this, DarioHealthFavoritesMovieListActivity::class.java)
             startActivity(intent)
@@ -240,6 +250,29 @@ class DarioHealthMovieListMainActivity : AppCompatActivity(),
         intent.putExtra("movieDetail", value)
         startActivity(intent)
 
+    }
+
+    override fun onBackPressed() {
+
+        exitDialog("Alert", "Are you sure you want to exit?")
+    }
+
+    private fun exitDialog(title: String, messge: String) {
+        if (!isFinishing) {
+            DarioHealthApplication.app?.showAlertDialogWithOkCancel(this,
+                title,
+                messge,
+                "OK",
+                "Cancel",
+                R.color.red,
+                R.color.green_dark,
+                SweetAlertDialog.NORMAL_TYPE,
+                OnSweetClickListener {
+                    DarioHealthApplication.app?.dismissProgressDialog()
+                    finish()
+                },
+                OnSweetClickListener { DarioHealthApplication.app?.dismissProgressDialog() })
+        }
     }
 
 

@@ -12,6 +12,8 @@ import com.dario.health.database.MovieListEntity
 import com.dario.health.model.generalMessageData.GeneralMessageData
 import com.dario.health.networkUtils.NetworkUtils
 import com.google.gson.Gson
+import java.util.*
+import kotlin.Comparator
 
 class DarioHealthMovieRepository(
     private val darioHealthServiceAPI: DarioHealthServiceAPI,
@@ -36,6 +38,7 @@ class DarioHealthMovieRepository(
             movieListLiveData.getValue()?.data?.get(position)?.isFavoriteMovie != true;
         movieListLiveData.getValue()?.data?.get(position)
             ?.let { favoritesMovieListDatabase.movieListDao().addFavoriteMovie(it) }
+        Collections.sort(movieListLiveData.getValue()?.data, compareByTitle);
         movieListLiveData.postValue(Response.Success(movieListLiveData.getValue()?.data))
         if (BuildConfig.IS_LOG_ENABLED)
             Log.e(TAG, "setFavoritesMovieStatus")
@@ -52,6 +55,7 @@ class DarioHealthMovieRepository(
                     Log.e(TAG, Gson().toJson(result.body()))
                 if (result?.body() != null && result?.isSuccessful) {
                     if (result.body()!!.Search != null && result.body()!!.Search.isNotEmpty()) {
+                        Collections.sort(result.body()!!.Search, compareByTitle);
                         movieListLiveData.postValue(Response.Success(result.body()!!.Search))
 
                     } else {
@@ -93,6 +97,7 @@ class DarioHealthMovieRepository(
             if (BuildConfig.IS_LOG_ENABLED)
                 Log.e("result", "" + result.size)
             if (result != null && result.isNotEmpty()) {
+                Collections.sort(result, compareByTitle);
                 favoritesMovieListLiveData.postValue(Response.Success(result))
             } else {
                 favoritesMovieListLiveData.postValue(
@@ -117,6 +122,7 @@ class DarioHealthMovieRepository(
             favoritesMovieListLiveData.getValue()?.data?.get(position)?.isFavoriteMovie != true;
         favoritesMovieListLiveData.getValue()?.data?.get(position)
             ?.let { favoritesMovieListDatabase.movieListDao().addFavoriteMovie(it) }
+        Collections.sort(favoritesMovieListLiveData.getValue()?.data, compareByTitle);
         favoritesMovieListLiveData.postValue(Response.Success(favoritesMovieListLiveData.getValue()?.data))
         if (BuildConfig.IS_LOG_ENABLED)
             Log.e(TAG, "setFavoritesMovieStatusDB")
@@ -149,6 +155,11 @@ class DarioHealthMovieRepository(
             Log.e(TAG, "deleteFavoritesMovie")
 
     }
+
+    var compareByTitle: Comparator<MovieListEntity> =
+        Comparator<MovieListEntity> { o1: MovieListEntity, o2: MovieListEntity ->
+            o1.Title.compareTo(o2.Title)
+        }
 
 
 }

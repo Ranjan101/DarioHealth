@@ -10,11 +10,15 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.cheezycode.randomquote.api.DarioHealthServiceAPI
+import com.cheezycode.randomquote.api.RetrofitHelper
 import com.dario.health.DarioHealthApplication
 import com.dario.health.adaptors.DarioHealthFavoritesMovieListAdaptor
 import com.dario.health.adaptors.DarioHealthMovieListAdaptor
+import com.dario.health.database.FavoritesMovieListDatabase
 import com.dario.health.database.MovieListEntity
 import com.dario.health.databinding.DarioHealthFavoritesMovieListActivityBinding
+import com.dario.health.repository.DarioHealthMovieRepository
 import com.dario.health.repository.Response
 import com.dario.health.viewmodel.FavoritesMovieViewModel
 import com.dario.health.viewmodel.FavoritesMovieViewModelFactory
@@ -50,7 +54,11 @@ class DarioHealthFavoritesMovieListActivity : AppCompatActivity(),
 
 
         }
-        val repository = DarioHealthApplication.darioHealthMovieRepository
+        val darioHealthServiceAPI =
+            RetrofitHelper.getInstance().create(DarioHealthServiceAPI::class.java)
+        val database = FavoritesMovieListDatabase.getDatabase(this)
+        val repository =
+            DarioHealthMovieRepository(darioHealthServiceAPI, database, this)
         movieViewModel =
             ViewModelProvider(
                 this,
