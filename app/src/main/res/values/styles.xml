@@ -69,12 +69,13 @@
 
         <item name="queryBackground">@color/colorContainer</item>
         <item name="background">@color/colorContainer</item>
-        <item name="searchHintIcon">@null</item>
+        <item name="searchHintIcon">@color/colorPrimary</item>
         <item name="queryHint">Search Movies</item>
         <item name="android:queryHint">Search Movies</item>
         <item name="android:background">@drawable/background_search</item>
-        <item name="android:textColor">@color/colorAccent</item>
-        <item name="android:textColorSecondary">@color/colorAccent</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:textCursorDrawable">@drawable/color_cursor</item>
+        <item name="android:textColorSecondary">@color/colorPrimary</item>
     </style>
 
     <style name="roundedImageViewRounded">
